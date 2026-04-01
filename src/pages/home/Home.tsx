@@ -1,86 +1,39 @@
 function Home() {
     return (
-        <section
-            style={{
-                backgroundColor: "#312e81",
-                display: "flex",
-                justifyContent: "center"
-            }}
-        >
+        <>
 
-            <article
-            style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                color: "white",
-                width: "100%",
-                maxWidth: "1280px"
-            }}
-            >
+            <section className="bg-indigo-900 flex justify-center">
+                <article className="container grid grid-cols-2 md:grid-cols-2 text-white">
 
-                <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",                    
-                    alignItems: "center",
-                    gap: "1rem",
-                    paddingTop: "1rem",
-                    paddingBottom: "1rem"
-                }}
-                >
-                    <h2
-                    style={{
-                        fontSize: "3rem",
-                        fontWeight: "bold"
-                    }}
-                    >
-                        Seja Bem-Vindo!
+                    <div className="flex flex-col justify-center items-center gap-4">
+
+                        <h2 className="text-5xl font-bold">
+                            Seja Bem-Vindo!
                         </h2>
-                    <p
-                    style={{
-                        fontSize: "1.25rem"
-                    }}
-                    >
-                        Expresse aqui seus pensamentos e opiniões
+
+                        <p className="text-xl">
+                            Expresse aqui seus pensamentos e opiniões
                         </p>
 
-                    <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                        gap: "1rem"
-                    }}
-                    >
-                        <div
-                        style={{
-                            borderRadius: "0.5rem",
-                            color: "white",
-                            border: "2px solid white",
-                            padding: "0.5rem 1rem"
-                        }}
-                        >
-                            Nova Postagem
+                        <div className="flex justify-around gap-4">
+                            <div className="rounded text-white
+                            border-white border-solid
+                            border-2 py-2 px-4">
+                                Nova Postagem
+                            </div>
                         </div>
+
                     </div>
-                </div>
 
-                <figure
-                style={{
-                    display: "flex",
-                    justifyContent: "center"
-                }}>
-                    <img
-                        src="https://i.imgur.com/fyfri1v.png"
-                        alt="Imagem Página Home"
-                        style={{
-                            width: "60%"
-                        }}
-                    />
-                </figure>
-
-            </article>
-        </section>
+                    <figure className="flex justify-center">
+                        <img
+                            src="https://i.imgur.com/fyfri1v.png"
+                            alt="Imagem Página Home"
+                            className="w-2/3" />
+                    </figure>
+                </article>
+            </section>
+        </>
     )
 }
 
