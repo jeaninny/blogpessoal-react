@@ -217,17 +217,6 @@ function FormPostagem() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="titulo">Texto da Postagem</label>
-                        <textarea
-                            placeholder="Texto"
-                            name='texto'
-                            className="border-2 border-slate-700 rounded p-2 h-40 resize-y"
-                            value={postagem.texto}
-                            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => atualizarEstado(e)}
-                        />
-                    </div>
-
-                    <div className="flex flex-col gap-2">
                         <label htmlFor="titulo">Tema da Postagem</label>
                         <select
                             name='tema'
@@ -242,6 +231,18 @@ function FormPostagem() {
                             ))}
 
                         </select>
+                    </div>
+
+
+                    <div className="flex flex-col gap-2">
+                        <label htmlFor="titulo">Texto da Postagem</label>
+                        <textarea
+                            placeholder="Texto"
+                            name='texto'
+                            className="border-2 border-slate-700 rounded p-2 h-40 resize-y"
+                            value={postagem.texto}
+                            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => atualizarEstado(e)}
+                        />
                     </div>
 
                     <button

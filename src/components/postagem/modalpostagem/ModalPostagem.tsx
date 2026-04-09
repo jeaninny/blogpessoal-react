@@ -16,10 +16,13 @@ function ModalPostagem() {
                 modal
                 contentStyle={{
                     borderRadius: '1rem',
-                    paddingBottom: '2rem'
+                    paddingBottom: '2rem',
+                    overflowY: 'auto',
+                    maxHeight: '85vh',
+                    width: '50%',
                 }}
             >
-                <FormPostagem />                
+                <FormPostagem />
             </Popup>
         </>
     )
