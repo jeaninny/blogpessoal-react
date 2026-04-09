@@ -19,24 +19,26 @@ function App() {
     <>
       <AuthProvider>
         <BrowserRouter>
-          <Navbar />
-          <div className="min-h-[80vh]">
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/cadastro" element={<Cadastro />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/temas" element={<ListaTemas />} />
-              <Route path="/cadastrartema" element={<FormTema />} />
-              <Route path="/editartema/:id" element={<FormTema />} />
-              <Route path="/deletartema/:id" element={<DeletarTema />} />
-              <Route path="/postagens" element={<ListaPostagens />} />
-              <Route path="/cadastrarpostagem" element={<FormPostagem />} />
-              <Route path="/editarpostagem/:id" element={<FormPostagem />} />
-              <Route path="/deletarpostagem/:id" element={<DeletarPostagem />} />
-            </Routes>
+          <div className="min-h-screen flex flex-col">
+            <Navbar />
+            <div className="min-h-[80vh]">
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/temas" element={<ListaTemas />} />
+                <Route path="/cadastrartema" element={<FormTema />} />
+                <Route path="/editartema/:id" element={<FormTema />} />
+                <Route path="/deletartema/:id" element={<DeletarTema />} />
+                <Route path="/postagens" element={<ListaPostagens />} />
+                <Route path="/cadastrarpostagem" element={<FormPostagem />} />
+                <Route path="/editarpostagem/:id" element={<FormPostagem />} />
+                <Route path="/deletarpostagem/:id" element={<DeletarPostagem />} />
+              </Routes>
+            </div>
+            <Footer />
           </div>
-          <Footer />
         </BrowserRouter>
       </AuthProvider>
     </>
