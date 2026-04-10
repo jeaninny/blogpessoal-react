@@ -1,32 +1,52 @@
 import { Link } from 'react-router-dom'
 import type Tema from '../../../models/Tema'
 
-interface CardTemaProps{
+interface CardTemaProps {
     tema: Tema
 }
 
 function CardTema({ tema }: CardTemaProps) {
     return (
-        <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
-            <header className='py-2 px-6 bg-indigo-800 text-white font-bold text-2xl'>
-                Tema
-            </header>
-            <p className='p-8 text-3xl bg-slate-200 h-full'>{tema.descricao}</p>
-            
-            <div className="flex">
-                <Link to={`/editartema/${tema.id}`} 
-                    className='w-full text-slate-100 bg-indigo-400 hover:bg-indigo-800 
-                        flex items-center justify-center py-2'>
-                    <button>Editar</button>
-                </Link>
+        <div className="flex flex-col rounded-xl overflow-hidden justify-between"
+            style={{
+                backgroundColor: "#1C1830",
+                border: "0.5px solid rgba(255,255,255,0.07)"
+            }}>
 
-                <Link to={`/deletartema/${tema.id}`} 
-                    className='text-slate-100 bg-red-400 hover:bg-red-700 w-full 
-                    flex items-center justify-center'>
-                    <button>Deletar</button>
-                </Link>
+            <div className="py-2 px-4"
+                style={{ borderBottom: "0.5px solid rgba(255,255,255,0.05)" }}>
+                <span className="text-xs font-medium"
+                    style={{ color: "#7C8FD4" }}>
+                    Tema
+                </span>
             </div>
 
+            <p className="p-6 text-base font-medium"
+                style={{ color: "#E8EAF0" }}>
+                {tema.descricao}
+            </p>
+
+            <div className="flex"
+                style={{ borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
+                <Link to={`/editartema/${tema.id}`}
+                    className="w-full flex items-center justify-center py-2 text-xs font-medium transition-all duration-200"
+                    style={{ color: "#C4849A", backgroundColor: "rgba(196,132,154,0.05)" }}
+                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(196,132,154,0.12)")}
+                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(196,132,154,0.05)")}>
+                    Editar
+                </Link>
+                <Link to={`/deletartema/${tema.id}`}
+                    className="w-full flex items-center justify-center py-2 text-xs font-medium transition-all duration-200"
+                    style={{
+                        color: "#E07070",
+                        backgroundColor: "rgba(224,112,112,0.05)",
+                        borderLeft: "0.5px solid rgba(255,255,255,0.05)"
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(224,112,112,0.12)")}
+                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(224,112,112,0.05)")}>
+                    Deletar
+                </Link>
+            </div>
         </div>
     )
 }

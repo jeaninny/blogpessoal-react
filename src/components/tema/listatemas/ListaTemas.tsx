@@ -58,27 +58,23 @@ function ListaTemas() {
 
     return (
         <>
-            {
-                isLoading && (
-                    <div className="flex justify-center w-full my-8">
-                        <SyncLoader
-                            color="#312e81"
-                            size={32}
-                        />
-                    </div>
-                )
-            }
+            {isLoading && (
+                <div className="flex justify-center w-full py-8"
+                    style={{ backgroundColor: "#13101E" }}>
+                    <SyncLoader color="#C4849A" size={12} />
+                </div>
+            )}
 
-            <div className="flex justify-center w-full px-4 my-4">
+            <div className="flex justify-center w-full py-8"
+                style={{ backgroundColor: "#13101E" }}>
                 <div className="container flex flex-col">
 
-                    {
-                        (!isLoading && temas.length === 0) && (
-                            <span className="text-3xl text-center my-8">
-                                Nenhum Tema foi encontrado!
-                            </span>
-                        )
-                    }
+                    {(!isLoading && temas.length === 0) && (
+                        <span className="text-3xl text-center my-8"
+                            style={{ color: "#E8EAF0" }}>
+                            Nenhum Tema foi encontrado!
+                        </span>
+                    )}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 
                                     lg:grid-cols-3 gap-8">

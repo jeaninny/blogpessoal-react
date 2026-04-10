@@ -190,13 +190,18 @@ function FormPostagem() {
 
     return (
         <>
-            <div className="container flex flex-col items-center mx-auto">
-                <h1 className="text-4xl text-center my-8">
+            <div className="container flex flex-col items-center mx-auto py-8"
+                style={{ backgroundColor: "#13101E" }}>
+                <h1 className="text-2xl font-semibold text-center mb-6"
+                    style={{ color: "#E8EAF0" }}>
                     {id === undefined ? "Cadastrar" : "Editar"} Postagem
                 </h1>
                 <button
                     onClick={retornar}
-                    className='border rounded px-4 py-2 bg-indigo-400 hover:bg-indigo-800 text-white'
+                    className="px-6 py-2 rounded-lg text-sm font-semibold mb-6 transition-all duration-200"
+                    style={{ backgroundColor: "#C4849A", color: "#13101E" }}
+                    onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+                    onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
                 >
                     Voltar
                 </button>
@@ -204,25 +209,30 @@ function FormPostagem() {
                 <form className="w-1/2 flex flex-col gap-4"
                     onSubmit={gerarNovaPostagem}
                 >
-
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="titulo">Título da Postagem</label>
+                    <div className="flex flex-col gap-1">
+                        <label htmlFor="titulo" className="text-xs font-medium" style={{ color: "#B8C0CC" }}>
+                            Título da Postagem
+                        </label>
                         <input
                             type="text"
                             placeholder="Titulo"
                             name='titulo'
-                            className="border-2 border-slate-700 rounded p-2"
+                            className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none"
+                            style={{ backgroundColor: "#1C1830", border: "1px solid rgba(255,255,255,0.12)", color: "#E8EAF0" }}
                             value={postagem.titulo}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         />
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="titulo">Tema da Postagem</label>
+                    <div className="flex flex-col gap-1">
+                        <label htmlFor="tema" className="text-xs font-medium" style={{ color: "#B8C0CC" }}>
+                            Tema da Postagem
+                        </label>
                         <select
                             name='tema'
                             id='tema'
-                            className="border p-2 border-slate-800 rounded"
+                            className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none"
+                            style={{ backgroundColor: "#1C1830", border: "1px solid rgba(255,255,255,0.12)", color: "#E8EAF0" }}
                             value={tema.id === 0 ? '' : tema.id}
                             onChange={(e) => buscarTemaPorId(e.currentTarget.value)}
                         >
@@ -230,17 +240,18 @@ function FormPostagem() {
                             {temas.map((tema) => (
                                 <option key={tema.id} value={tema.id}>{tema.descricao}</option>
                             ))}
-
                         </select>
                     </div>
 
-
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="titulo">Texto da Postagem</label>
+                    <div className="flex flex-col gap-1">
+                        <label htmlFor="texto" className="text-xs font-medium" style={{ color: "#B8C0CC" }}>
+                            Texto da Postagem
+                        </label>
                         <textarea
                             placeholder="Texto"
                             name='texto'
-                            className="border-2 border-slate-700 rounded p-2 h-40 resize-y"
+                            className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none h-40 resize-y"
+                            style={{ backgroundColor: "#1C1830", border: "1px solid rgba(255,255,255,0.12)", color: "#E8EAF0" }}
                             value={postagem.texto}
                             onChange={(e: ChangeEvent<HTMLTextAreaElement>) => atualizarEstado(e)}
                         />
@@ -248,17 +259,13 @@ function FormPostagem() {
 
                     <button
                         type='submit'
-                        className='rounded disabled:bg-slate-200 bg-indigo-400 
-                        hover:bg-indigo-800 text-white font-bold 
-                        w-1/2 mx-auto py-2 flex justify-center'
+                        className='w-1/2 mx-auto py-2 rounded-lg text-sm font-semibold flex justify-center transition-all duration-200'
+                        style={{ backgroundColor: carregandoTema ? "rgba(196,132,154,0.4)" : "#C4849A", color: "#13101E" }}
+                        onMouseEnter={e => { if (!carregandoTema) e.currentTarget.style.opacity = "0.85" }}
+                        onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
                         disabled={carregandoTema}
                     >
-                        {isLoading ? (
-                            <ClipLoader color="#ffffff" size={24}
-                            />
-                        ) : (
-                            <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
-                        )}
+                        {isLoading ? <ClipLoader color="#13101E" size={20} /> : (id === undefined ? 'Cadastrar' : 'Atualizar')}
                     </button>
 
 

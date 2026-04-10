@@ -9,12 +9,17 @@ function ModalPostagem() {
             <Popup
                 trigger={
                     <button
-                        className='border rounded px-4 py-2 hover:bg-white hover:text-indigo-800'>
+                        className="px-6 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
+                        style={{ backgroundColor: "#C4849A", color: "#13101E" }}
+                        onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+                        onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                         Nova Postagem
                     </button>
                 }
                 modal
                 contentStyle={{
+                    backgroundColor: '#13101E',
+                    border: '0.5px solid rgba(255,255,255,0.07)',
                     borderRadius: '1rem',
                     paddingBottom: '2rem',
                     overflowY: 'auto',

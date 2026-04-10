@@ -22,21 +22,42 @@ function Navbar() {
 
     if (usuario.token !== "") {
         component = (
-            <div className='w-full flex justify-center py-4
-            			   bg-indigo-900 text-white'>
+            <div className="w-full flex justify-center px-8"
+                style={{
+                    background: "linear-gradient(180deg, #1A1528, #151220)",
+                    borderBottom: "0.5px solid rgba(255,255,255,0.07)",
+                    height: "52px"
+                }}>
 
-                <div className="container flex justify-between text-lg mx-8">
-
-                    <Link to="/home" className="text-2xl font-bold">
-                        Blog Pessoal
+                <div className="container flex justify-between items-center">
+                    <Link to="/home"
+                        className="text-base font-medium"
+                        style={{ color: "#E8EAF0", letterSpacing: "-0.03em" }}>
+                        Blog <span style={{ color: "#C4849A" }}>Codex</span>
                     </Link>
 
-                    <div className='flex gap-4'>
-                        <Link to='/postagens' className='hover:underline'>Postagens</Link>
-                        <Link to='/temas' className='hover:underline'>Temas</Link>
-                        <Link to='/cadastrartema' className='hover:underline'>Cadastrar tema</Link>
-                        <Link to='/perfil' className='hover:underline'>Perfil</Link>
-                        <Link to='' onClick={logout} className="hover:underline">
+                    <div className="flex gap-6 text-sm">
+                        <Link to='/postagens' style={{ color: "#6B7280" }}
+                            onMouseEnter={e => (e.currentTarget.style.color = "#E8EAF0")}
+                            onMouseLeave={e => (e.currentTarget.style.color = "#6B7280")}>
+                            Postagens
+                        </Link>
+                        <Link to='/temas' style={{ color: "#6B7280" }}
+                            onMouseEnter={e => (e.currentTarget.style.color = "#E8EAF0")}
+                            onMouseLeave={e => (e.currentTarget.style.color = "#6B7280")}>
+                            Temas
+                        </Link>
+                        <Link to='/cadastrartema' style={{ color: "#6B7280" }}
+                            onMouseEnter={e => (e.currentTarget.style.color = "#E8EAF0")}
+                            onMouseLeave={e => (e.currentTarget.style.color = "#6B7280")}>
+                            Cadastrar tema
+                        </Link>
+                        <Link to='/perfil' style={{ color: "#E8EAF0" }}>
+                            Perfil
+                        </Link>
+                        <Link to='' onClick={logout} style={{ color: "#6B7280" }}
+                            onMouseEnter={e => (e.currentTarget.style.color = "#E8EAF0")}
+                            onMouseLeave={e => (e.currentTarget.style.color = "#6B7280")}>
                             Sair
                         </Link>
                     </div>
@@ -47,7 +68,7 @@ function Navbar() {
 
     return (
         <>
-        {component}
+            {component}
         </>
     )
 }

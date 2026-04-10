@@ -124,47 +124,39 @@ function FormTema() {
         navigate('/temas');
     }
 
-    console.log(JSON.stringify(tema));
-
     return (
-        <div className="container flex flex-col items-center justify-center mx-auto">
-            <h1 className="text-4xl text-center my-8">
+        <div className="min-h-screen flex flex-col items-center justify-center px-4"
+            style={{ backgroundColor: "#13101E" }}>
+            <h1 className="text-2xl font-semibold text-center mb-6"
+                style={{ color: "#E8EAF0" }}>
                 {id === undefined ? "Cadastrar" : "Editar"} Tema
             </h1>
 
-            <form className="w-1/2 flex flex-col gap-4"
+            <form className="w-full max-w-sm flex flex-col gap-4"
                 onSubmit={gerarNovoTema}
             >
-                <div className="flex flex-col gap-2">
-                    <label htmlFor="descricao">Descrição do Tema</label>
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="descricao" className="text-xs font-medium"
+                        style={{ color: "#B8C0CC" }}>
+                        Descrição do Tema
+                    </label>
                     <input
                         type="text"
                         placeholder="Descreva aqui seu tema"
                         name='descricao'
-                        className="border-2 border-slate-700 rounded p-2"
+                        className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none"
+                        style={{ backgroundColor: "#1C1830", border: "1px solid rgba(255,255,255,0.12)", color: "#E8EAF0" }}
                         value={tema.descricao}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                 </div>
                 <button
-                    className="rounded text-slate-100 bg-indigo-400 
-                               hover:bg-indigo-800 w-1/2 py-2 mx-auto flex justify-center"
+                    className="w-full py-2 rounded-lg text-sm font-semibold flex justify-center transition-all duration-200"
+                    style={{ backgroundColor: "#C4849A", color: "#13101E" }}
+                    onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+                    onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
                     type="submit">
-
-                    {
-                        isLoading ?
-
-                            <ClipLoader
-                                color="#ffffff"
-                                size={24}
-                            />
-
-                            :
-
-                            <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
-
-                    }
-
+                    {isLoading ? <ClipLoader color="#13101E" size={20} /> : (id === undefined ? "Cadastrar" : "Atualizar")}
                 </button>
             </form>
         </div>

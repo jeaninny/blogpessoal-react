@@ -86,41 +86,70 @@ function DeletarPostagem() {
     }
 
     return (
-        <div className='container w-1/3 mx-auto'>
-            <h1 className='text-4xl text-center my-4'>Deletar Postagem</h1>
+        <div className="min-h-screen flex flex-col items-center justify-center px-4"
+            style={{ backgroundColor: "#13101E" }}>
 
-            <p className='text-center font-semibold mb-4'>
+            <h1 className="text-2xl font-semibold text-center mb-2"
+                style={{ color: "#E8EAF0" }}>
+                Deletar Postagem
+            </h1>
+            <p className="text-sm text-center mb-6"
+                style={{ color: "#6B7280" }}>
                 Você tem certeza de que deseja apagar a postagem a seguir?
             </p>
 
-            <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
-                <header
-                    className='py-2 px-6 bg-indigo-600 text-white font-bold text-2xl'>
-                    Postagem
-                </header>
-                <div className="p-4">
-                    <p className='text-xl h-full'>{postagem.titulo}</p>
-                    <p>{postagem.texto}</p>
+            <div className="w-full max-w-sm rounded-xl overflow-hidden"
+                style={{
+                    backgroundColor: "#1C1830",
+                    border: "0.5px solid rgba(255,255,255,0.07)"
+                }}>
+
+                <div className="flex w-full py-3 px-4 items-center gap-3"
+                    style={{ borderBottom: "0.5px solid rgba(255,255,255,0.05)" }}>
+                    <img
+                        src={postagem.usuario?.foto}
+                        className="w-8 h-8 rounded-full object-cover"
+                        alt={postagem.usuario?.nome}
+                        style={{ border: "2px solid #C4849A" }}
+                    />
+                    <h3 className="text-sm font-medium"
+                        style={{ color: "#B8C0CC" }}>
+                        {postagem.usuario?.nome}
+                    </h3>
                 </div>
-                <div className="flex">
+
+                <div className="p-4 flex flex-col gap-2">
+                    <h4 className="text-sm font-medium"
+                        style={{ color: "#E8EAF0" }}>
+                        {postagem.titulo}
+                    </h4>
+                    <p className="text-xs leading-relaxed"
+                        style={{ color: "#B8C0CC" }}>
+                        {postagem.texto}
+                    </p>
+                </div>
+
+                <div className="flex"
+                    style={{ borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
                     <button
-                        className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2'
+                        className="w-full py-2 text-xs font-medium transition-all duration-200"
+                        style={{ color: "#E07070", backgroundColor: "rgba(224,112,112,0.05)" }}
+                        onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(224,112,112,0.12)")}
+                        onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(224,112,112,0.05)")}
                         onClick={retornar}>
                         Não
                     </button>
                     <button
-                        className='w-full text-slate-100 bg-indigo-400 
-                        hover:bg-indigo-600 flex items-center justify-center'
+                        className="w-full py-2 text-xs font-medium flex items-center justify-center transition-all duration-200"
+                        style={{
+                            color: "#C4849A",
+                            backgroundColor: "rgba(196,132,154,0.05)",
+                            borderLeft: "0.5px solid rgba(255,255,255,0.05)"
+                        }}
+                        onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(196,132,154,0.12)")}
+                        onMouseLeave={e => (e.currentTarget.style.backgroundColor = "rgba(196,132,154,0.05)")}
                         onClick={deletarPostagem}>
-
-                        {isLoading ?
-                            <ClipLoader
-                                color="#ffffff"
-                                size={24}
-                            /> :
-                            <span>Sim</span>
-                        }
-
+                        {isLoading ? <ClipLoader color="#C4849A" size={16} /> : "Sim"}
                     </button>
                 </div>
             </div>

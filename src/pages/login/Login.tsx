@@ -10,9 +10,14 @@ function Login() {
   const navigate = useNavigate();
 
   // Estado usuario, que vai guardar os dados do usuário que será autenticado
-  const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
-    {} as UsuarioLogin
-  );
+  const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>({
+    id: 0,
+    nome: "",
+    usuario: "",
+    senha: "",
+    foto: "",
+    token: ""
+  });
 
   // Consumo do Contexto AuthContext
   // (usamos a desestruturação para selecionar apenas o que precisamos)
@@ -39,74 +44,90 @@ function Login() {
     handleLogin(usuarioLogin)
   }
 
-  console.log(JSON.stringify(usuarioLogin))
-
-
   return (
-    <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold">
-        <form className="flex justify-center items-center flex-col w-1/2 gap-4"
-          onSubmit={login}
-        >
-          <h2 className="text-slate-900 text-5xl">Entrar</h2>
-          <div className="flex flex-col w-full">
-            <label htmlFor="usuario">Usuario</label>
+    <div className="min-h-screen flex items-center justify-center px-4"
+      style={{ backgroundColor: "#13101E" }}>
+
+      <div className="w-full max-w-sm rounded-2xl p-12 flex flex-col gap-5"
+        style={{
+          backgroundColor: "#1C1830",
+          border: "0.5px solid rgba(255,255,255,0.07)"
+        }}>
+
+        {/* Logo */}
+        <div className="text-center mb-2">
+          <p className="text-lg font-medium" style={{ color: "#E8EAF0", letterSpacing: "-0.03em" }}>
+            Blog <span style={{ color: "#C4849A" }}>Codex</span>
+          </p>
+          <p className="text-xs mt-1" style={{ color: "#6B7280" }}>Seja bem-vindo(a) de volta</p>
+        </div>
+
+        <form onSubmit={login} className="flex flex-col gap-5">
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="usuario" className="text-xs font-medium" style={{ color: "#B8C0CC" }}>
+              Usuário
+            </label>
             <input
               type="text"
               id="usuario"
               name="usuario"
-              placeholder="Usuario"
-              className="border-2 border-slate-700 rounded p-2"
+              placeholder="seu@email.com"
+              className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none"
+              style={{
+                backgroundColor: "#13101E",
+                border: "1px solid rgba(255,255,255,0.12)",
+                color: "#E8EAF0"
+              }}
               value={usuarioLogin.usuario}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              onChange={atualizarEstado}
             />
           </div>
 
-          <div className="flex flex-col w-full">
-            <label htmlFor="senha">Senha</label>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="senha" className="text-xs font-medium" style={{ color: "#B8C0CC" }}>
+              Senha
+            </label>
             <input
               type="password"
               id="senha"
               name="senha"
-              placeholder="Senha"
-              className="border-2 border-slate-700 rounded p-2"
+              placeholder="••••••••"
+              className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none"
+              style={{
+                backgroundColor: "#13101E",
+                border: "1px solid rgba(255,255,255,0.12)",
+                color: "#E8EAF0"
+              }}
               value={usuarioLogin.senha}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+              onChange={atualizarEstado}
             />
           </div>
 
           <button
             type="submit"
-            className="rounded bg-indigo-400 flex justify-center
-                    hover:bg-indigo-900 text-white w-1/2 py-2">
-            {
-              isLoading ?
-
-                <ClipLoader
-                  color="#ffffff"
-                  size={24}
-                />
-
-                :
-                <span>Entrar</span>
-            }
+            className="w-full py-2 rounded-lg text-sm font-semibold flex justify-center transition-all duration-200"
+            style={{ backgroundColor: "#C4849A", color: "#13101E" }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+            onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+            disabled={isLoading}>
+            {isLoading ? <ClipLoader color="#13101E" size={20} /> : "Entrar"}
           </button>
 
-          <hr className="border-slate-800 w-full" />
+        </form>
 
-          <p>
-            Ainda não tem uma conta? {" "}
-            <Link to="/cadastro" className="text-indigo-800 hover:underline">
+        <div className="text-center pt-2" style={{ borderTop: "0.5px solid rgba(255,255,255,0.07)" }}>
+          <p className="text-xs" style={{ color: "#6B7280" }}>
+            Ainda não tem uma conta?{" "}
+            <Link to="/cadastro" style={{ color: "#C4849A" }}>
               Cadastre-se
             </Link>
           </p>
-        </form>
+        </div>
 
-        <div className="bg-[url('https://i.imgur.com/ZZFAmzo.jpg')] lg:block hidden bg-no-repeat
-      w-full min-h-screen bg-cover bg-center"
-        ></div>
       </div>
-    </>
+    </div>
+
   )
 }
 

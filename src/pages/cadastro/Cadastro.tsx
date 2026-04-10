@@ -79,114 +79,131 @@ function Cadastro() {
     navigate("/")
   }
 
-  console.log(JSON.stringify(usuario))
-  console.log(confirmarSenha)
-
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold">
-        <div className="bg-[url('https://i.imgur.com/ZZFAmzo.jpg')] lg:block hidden bg-no-repeat w-full min-h-screen bg-cover bg-center"
-        ></div>
-        <form className="flex justify-center items-center flex-col w-2/3 gap-3"
-          onSubmit={cadastrarNovoUsuario}>
-          <h2 className="text-slate-900 text-5xl">Cadastrar</h2>
-          <div className="flex flex-col w-full">
-            <label htmlFor="nome">Nome</label>
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              placeholder="Nome"
-              className="border-2 border-slate-700 rounded p-2"
-              value={usuario.nome}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-            />
+      <div className="min-h-screen flex items-center justify-center px-4 py-12"
+        style={{ backgroundColor: "#13101E" }}>
+        <div className="w-full max-w-sm rounded-2xl overflow-hidden"
+          style={{
+            backgroundColor: "#1C1830",
+            border: "0.5px solid rgba(255,255,255,0.07)"
+          }}>
+
+          <div className="p-10 flex flex-col gap-5">
+
+            <div className="text-center mb-2">
+              <p className="text-lg font-medium" style={{ color: "#E8EAF0", letterSpacing: "-0.03em" }}>
+                Blog <span style={{ color: "#C4849A" }}>Codex</span>
+              </p>
+              <p className="text-xs mt-1" style={{ color: "#6B7280" }}>Crie sua conta</p>
+            </div>
+
+            <form className="flex flex-col gap-4" onSubmit={cadastrarNovoUsuario}>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="nome" className="text-xs font-medium" style={{ color: "#B8C0CC" }}>
+                  Nome
+                </label>
+                <input
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  placeholder="Nome"
+                  className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none"
+                  style={{ backgroundColor: "#13101E", border: "1px solid rgba(255,255,255,0.12)", color: "#E8EAF0" }}
+                  value={usuario.nome}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label htmlFor="usuario" className="text-xs font-medium" style={{ color: "#B8C0CC" }}>
+                  Usuario
+                </label>
+                <input
+                  type="text"
+                  id="usuario"
+                  name="usuario"
+                  placeholder="Usuario"
+                  className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none"
+                  style={{ backgroundColor: "#13101E", border: "1px solid rgba(255,255,255,0.12)", color: "#E8EAF0" }}
+                  value={usuario.usuario}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label htmlFor="foto" className="text-xs font-medium" style={{ color: "#B8C0CC" }}>
+                  Foto
+                </label>
+                <input
+                  type="text"
+                  id="foto"
+                  name="foto"
+                  placeholder="Foto"
+                  className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none"
+                  style={{ backgroundColor: "#13101E", border: "1px solid rgba(255,255,255,0.12)", color: "#E8EAF0" }}
+                  value={usuario.foto}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label htmlFor="senha" className="text-xs font-medium" style={{ color: "#B8C0CC" }}>
+                  Senha
+                </label>
+                <input
+                  type="password"
+                  id="senha"
+                  name="senha"
+                  placeholder="Senha"
+                  className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none"
+                  style={{ backgroundColor: "#13101E", border: "1px solid rgba(255,255,255,0.12)", color: "#E8EAF0" }}
+                  value={usuario.senha}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label htmlFor="confirmarSenha" className="text-xs font-medium" style={{ color: "#B8C0CC" }}>
+                  Confirmar Senha
+                </label>
+                <input
+                  type="password"
+                  id="confirmarSenha"
+                  name="confirmarSenha"
+                  placeholder="Confirmar Senha"
+                  className="px-4 py-2 rounded-lg text-sm w-full focus:outline-none"
+                  style={{ backgroundColor: "#13101E", border: "1px solid rgba(255,255,255,0.12)", color: "#E8EAF0" }}
+                  value={confirmarSenha}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => handleConfirmarSenha(e)}
+                />
+              </div>
+
+              <div className="flex gap-4 pt-2">
+                <button
+                  type="reset"
+                  className="w-1/2 py-2 rounded-lg text-sm font-semibold transition-all duration-200"
+                  style={{ backgroundColor: "#E07070", color: "#13101E" }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                  onClick={retornar}>
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className="w-1/2 py-2 rounded-lg text-sm font-semibold flex justify-center transition-all duration-200"
+                  style={{ backgroundColor: "#C4849A", color: "#13101E" }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                  disabled={isLoading}>
+                  {isLoading ? <ClipLoader color="#13101E" size={20} /> : "Cadastrar"}
+                </button>
+              </div>
+
+            </form>
+
           </div>
-
-          <div className="flex flex-col w-full">
-            <label htmlFor="usuario">Usuario</label>
-            <input
-              type="text"
-              id="usuario"
-              name="usuario"
-              placeholder="Usuario"
-              className="border-2 border-slate-700 rounded p-2"
-              value={usuario.usuario}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-            />
-          </div>
-
-          <div className="flex flex-col w-full">
-            <label htmlFor="foto">Foto</label>
-            <input
-              type="text"
-              id="foto"
-              name="foto"
-              placeholder="Foto"
-              className="border-2 border-slate-700 rounded p-2"
-              value={usuario.foto}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-            />
-          </div>
-
-          <div className="flex flex-col w-full">
-            <label htmlFor="senha">Senha</label>
-            <input
-              type="password"
-              id="senha"
-              name="senha"
-              placeholder="Senha"
-              className="border-2 border-slate-700 rounded p-2"
-              value={usuario.senha}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-            />
-          </div>
-
-          <div className="flex flex-col w-full">
-            <label htmlFor="confirmarSenha">Confirmar Senha</label>
-            <input
-              type="password"
-              id="confirmarSenha"
-              name="confirmarSenha"
-              placeholder="Confirmar Senha"
-              className="border-2 border-slate-700 rounded p-2"
-              value={confirmarSenha}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => handleConfirmarSenha(e)}
-            />
-          </div>
-
-          <div className="flex justify-around w-full gap-8">
-            <button
-              type="reset"
-              className="rounded text-white bg-red-400 hover:bg-red-700 w-1/2 py-2"
-              onClick={retornar}
-            >
-              Cancelar
-            </button>
-
-            <button
-              type="submit"
-              className="rounded text-white bg-indigo-400
-            hover:bg-indigo-900 w-1/2 py-2
-            flex justify-center"
-            >
-              {
-                isLoading ?
-
-                  <ClipLoader
-                    color="#ffffff"
-                    size={24}
-                  />
-
-                  :
-                  <span>Cadastrar</span>
-              }
-
-            </button>
-          </div>
-
-        </form>
-
+        </div>
       </div>
     </>
   )

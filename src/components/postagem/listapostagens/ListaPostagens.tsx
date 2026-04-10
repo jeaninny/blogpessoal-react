@@ -1,88 +1,86 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
-import { AuthContext } from "../../../contexts/AuthContext";
 import type Postagem from "../../../models/Postagem";
-import { buscar } from "../../../services/Service";
 import CardPostagem from "../cardpostagem/CardPostagem";
-import { ToastAlerta } from "../../../utils/ToastAlerta";
+import { useState } from "react";
 
-function ListaPostagens() {
 
-    // Objeto responsável por redirecionar o usuário para uma outra rota
-    const navigate = useNavigate();
+interface ListaPostagemProps {
+    postagens: Postagem[]
+    isLoading: boolean
+}
 
-    // Estado para controlar o Loader (animação de carregamento)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+function ListaPostagens({ postagens, isLoading }: ListaPostagemProps) {
 
-    // Estado que irá receber todos as postagens persistidas no Backend
-    const [postagens, setPostagens] = useState<Postagem[]>([])
+    const POSTAGENS_POR_PAGINA = 6
 
-    // Acessa o token do usuário autenticado
-    const { usuario, handleLogout } = useContext(AuthContext)
+    const [paginaAtual, setPaginaAtual] = useState<number>(0)
 
-    // Cria um objeto para armazenar o token
-    const token = usuario.token
+    const totalPaginas = Math.ceil(postagens.length / POSTAGENS_POR_PAGINA)
 
-    // Cria um useEffect para monitorar o token
-    useEffect(() => {
-        if (token === '') {
-            ToastAlerta('Você precisa estar logado!', "info")
-            navigate('/')
-        }
-    }, [token])
-
-    // Cria um useEffect para inicializar a função buscarPostagens
-    useEffect(() => {
-        buscarPostagens()    
-    }, [postagens.length])
-
-    // Função para buscar todas as postagens no backend
-    async function buscarPostagens() {
-        try {
-            setIsLoading(true)
-
-            await buscar('/postagens', setPostagens, {
-                headers: { Authorization: token }
-            })
-        } catch (error: any) {
-            if (error.toString().includes('401')) {
-                handleLogout()
-            }
-        }finally {
-            setIsLoading(false)
-        }
-    }
+    const postagensDaPagina = postagens.slice(
+        paginaAtual * POSTAGENS_POR_PAGINA,
+        paginaAtual * POSTAGENS_POR_PAGINA + POSTAGENS_POR_PAGINA
+    )
 
     return (
         <>
 
             {isLoading && (
-                <div className="flex justify-center w-full my-8">
-                    <SyncLoader
-                        color="#312e81"
-                        size={32}
-                    />
+                <div className="flex justify-center w-full py-8 flex-1"
+                    style={{ backgroundColor: "#13101E", minHeight: "100%" }}>
+                    <SyncLoader color="#C4849A" size={12} />
                 </div>
             )}
 
-            <div className="flex justify-center w-full my-4">
+            <div className="flex justify-center w-full py-8"
+                style={{ backgroundColor: "#13101E" }}>
                 <div className="container flex flex-col">
 
                     {(!isLoading && postagens.length === 0) && (
-                            <span className="text-3xl text-center my-8">
-                                Nenhuma Postagem foi encontrada!
-                            </span>
+                        <span className="text-3xl text-center my-8"
+                            style={{ color: "#E8EAF0" }}>
+                            Nenhuma postagem encontrada!
+                        </span>
                     )}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 
-                                    lg:grid-cols-3 gap-8">
-                            {
-                                postagens.map((postagem) => (
-                                    <CardPostagem key={postagem.id} postagem={postagem}/>
-                                ))
-                            }
+                lg:grid-cols-3 gap-8 items-stretch">
+                        {postagensDaPagina.map((postagem) => (
+                            <CardPostagem key={postagem.id} postagem={postagem} />
+                        ))}
                     </div>
+
+                    {totalPaginas > 1 && (
+                        <div className="flex justify-center items-center gap-4 mt-8">
+                            <button
+                                onClick={() => setPaginaAtual(p => p - 1)}
+                                disabled={paginaAtual === 0}
+                                className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                                style={{
+                                    backgroundColor: paginaAtual === 0 ? "rgba(196,132,154,0.2)" : "#C4849A",
+                                    color: paginaAtual === 0 ? "#6B7280" : "#13101E",
+                                    cursor: paginaAtual === 0 ? "not-allowed" : "pointer"
+                                }}>
+                                Anterior
+                            </button>
+
+                            <span className="text-sm" style={{ color: "#6B7280" }}>
+                                {paginaAtual + 1} de {totalPaginas}
+                            </span>
+
+                            <button
+                                onClick={() => setPaginaAtual(p => p + 1)}
+                                disabled={paginaAtual === totalPaginas - 1}
+                                className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                                style={{
+                                    backgroundColor: paginaAtual === totalPaginas - 1 ? "rgba(196,132,154,0.2)" : "#C4849A",
+                                    color: paginaAtual === totalPaginas - 1 ? "#6B7280" : "#13101E",
+                                    cursor: paginaAtual === totalPaginas - 1 ? "not-allowed" : "pointer"
+                                }}>
+                                Próxima
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </>
